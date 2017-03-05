@@ -12,8 +12,13 @@ class PostRepository
         $this->model = $post;
     }
 
-    public function index()
+    public function index($data, $per_page = 10)
     {
-     
+        $model = $this->model;
+
+        if (isset($data['query'])) {
+            $model = $model->where('display_name', 'LIKE', "%{$data['query']}%");
+        }
+        return $model->paginate($per_page);
     }
 }

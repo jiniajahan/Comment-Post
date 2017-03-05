@@ -16,3 +16,5 @@ Route::get('/', function () {
 });
 
 Route::get('/posts', 'PostController@index');
+Route::get('/posts/{id}', 'PostController@details');
+Route::get('/posts/{post}/comments', 'CommentController@addComments');

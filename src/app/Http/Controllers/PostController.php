@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    protected $service;
 
     public function __construct()
     {
@@ -18,12 +17,22 @@ class PostController extends Controller
     {
         try {
             $posts = \DB::table('post')->get();
-            dd($posts);
-
-            return view('post', compact('posts'));
+            return view('post.index', compact('posts'));
 
         } catch (\Exception $e) {
             throw $e;
         }
-    }
+    }   
+    public function details($id)
+    {
+        try {
+            $post = \DB::table('post')->find($id);
+            
+            return view('post.details', compact('post'));
+
+        } catch (\Exception $e) {
+            throw $e;
+        }
+    }    
+    
 }
