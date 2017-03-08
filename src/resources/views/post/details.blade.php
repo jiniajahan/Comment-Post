@@ -37,9 +37,23 @@
                             <p>{{$post->description}}</p>
                         </div>
                         <hr>
+                        <div class="comments">
+                            <ul class="list-group">
+                                @foreach($post->comments as $comment)
+                                    <li class="list-group-item">
+                                        <strong>
+                                            {{ $comment->created_at->diffForHumans() }}: &nbsp;
+                                        </strong>
+                                        {{ $comment->body }}
+                                    </li>
+                                    @endforeach
+                            </ul>
+                        </div>
+                        <hr>
                         <div class="card">
                             <div class="card-block">
                                 <form method="POST" action="/posts/{{$post->id}}/comments">
+                                    {{ csrf_field() }}
                                     <div class="form-group">
                                         <input type="text" name="body" placeholder="your comment here" class="form-control">
                                     </div>
@@ -49,6 +63,7 @@
                                 </form>
                             </div>
                         </div>
+                        @include('error')
                     </div>
                 </div>
         </div>

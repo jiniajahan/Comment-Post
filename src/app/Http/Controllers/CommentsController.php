@@ -2,21 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Post;
+use Illuminate\Http\Request;
 use App\Comment;
 
 class CommentsController extends Controller
 {
 
 
-    public function addComments(Post $post){
-//        echo "hello ";
+    public function store(Post $post){
 
-        Comment::create([
-            'body'  =>request('body'),
-            'post_id'=>$post->id
-        ]);
+        $this->validate(request(),['body'=>'required|min:2']);
+//      $post->addComment(request('body','post_id'));
 
         return back();
     }

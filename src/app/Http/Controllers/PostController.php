@@ -16,7 +16,8 @@ class PostController extends Controller
     public function index(Request $request)
     {
         try {
-            $posts = \DB::table('post')->get();
+
+            $posts = Post::all();
             return view('post.index', compact('posts'));
 
         } catch (\Exception $e) {
@@ -26,7 +27,8 @@ class PostController extends Controller
     public function details($id)
     {
         try {
-            $post = \DB::table('post')->find($id);
+
+            $post = Post::find($id);
             
             return view('post.details', compact('post'));
 
